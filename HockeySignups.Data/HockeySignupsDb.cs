@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace HockeySignups.Data
@@ -95,7 +96,7 @@ namespace HockeySignups.Data
 
             InitiateDbAction(cmd =>
             {
-                cmd.CommandText = "SELECT * FORM EventSignups WHERE EventId = @eventId";
+                cmd.CommandText = "SELECT * FROM EventSignups WHERE EventId = @eventId";
                 cmd.Parameters.AddWithValue("@eventId", eventId);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -181,13 +182,36 @@ namespace HockeySignups.Data
             InitiateDbAction(cmd =>
             {
                 cmd.CommandText =
-                    "INSERT INTO NotificationSignup (Email, FirstName, LastName) VALUES (@email, @firstName, @lastName)";
+                    "INSERT INTO NotificationSignups (Email, FirstName, LastName) VALUES (@email, @firstName, @lastName)";
                 cmd.Parameters.AddWithValue("@email", ns.Email);
                 cmd.Parameters.AddWithValue("@firstName", ns.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", ns.LastName);
                 cmd.ExecuteNonQuery();
             });
         }
+
+        public IEnumerable<EventWithPeople> GetEventsWithCount()
+        {
+            var result = new List<EventWithPeople>();
+            InitiateDbAction(cmd =>
+            {
+                cmd.CommandText = "GetEventsWithCount";
+                cmd.CommandType = CommandType.StoredProcedure;
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new EventWithPeople
+                    {
+                        Date = (DateTime) reader["Date"],
+                        MaxPeople = (int) reader["MaxPeople"],
+                        PeopleCount = (int) reader["PeopleCount"],
+                        Id = (int) reader["Id"]
+                    });
+                }
+            });
+
+            return result;
+        } 
 
         private void InitiateDbAction(Action<SqlCommand> action)
         {

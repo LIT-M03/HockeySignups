@@ -42,6 +42,7 @@
     <Compile Include="Event.cs" />
     <Compile Include="EventSignup.cs" />
     <Compile Include="EventStatus.cs" />
+    <Compile Include="EventWithPeople.cs" />
     <Compile Include="HockeySignupsDb.cs" />
     <Compile Include="NotificationSignup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

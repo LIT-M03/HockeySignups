@@ -131,6 +131,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventDetailsViewModel.cs" />
     <Compile Include="Models\EventSignupViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\site-scripts\admin-index.js" />
+    <Content Include="Scripts\site-scripts\notification-signups.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -224,6 +226,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Hockey\Index.cshtml" />
     <Content Include="Views\Hockey\LatestEvent.cshtml" />
+    <Content Include="Views\Hockey\NotificationSignup.cshtml" />
+    <Content Include="Views\Hockey\NotificationSignupConfirmation.cshtml" />
+    <Content Include="Views\Admin\History.cshtml" />
+    <Content Include="Views\Admin\EventDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

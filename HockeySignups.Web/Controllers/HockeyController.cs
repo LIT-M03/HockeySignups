@@ -68,5 +68,23 @@ namespace HockeySignups.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult NotificationSignup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NotificationSignup(string firstName, string lastName, string email)
+        {
+            var db = new HockeySignupsDb(_connectionString);
+            var ns = new NotificationSignup
+            {
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName
+            };
+            db.AddNotificationSignup(ns);
+            return View("NotificationSignupConfirmation");
+        }
     }
 }
